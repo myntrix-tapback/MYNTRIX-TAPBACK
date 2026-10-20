@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en>"
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+content="width=device-width,
+initial-scale=1.0">
+    <title>MYNTRIX TAPBACK</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071426;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: #00d9ff;
+            margin-top: 70px;
+        }
+        p{
+            color: #b9c9df;
+            font-size: 18px;
+        }
+        .card {
+            max-width: 350px;
+            margin: 35px auto;
+            padding: 30px 20px;
+            background: #10243d;
+            border: 1px solid #00d9ff;
+            border-radius: 20px;
+            box-shadow: 0 0 12px #00d9ff33;
+            animation: cardGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes cardGlow {
+            from {
+                box-shadow: 0 0 8px #00d9ff33;
+            }
+            to {
+                box-shadow: 0 0 24px #00d9ff9922;
+            }
+        }
+        button {
+            background: #00d9ff;
+            color: #071426;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 12px #00d9ff88;
+            transition: all 0.3 ease;
+        }
+        button :hover {
+            background: #ffffff;
+            box-shadow: 0 0 25px #00d9ff;
+            transform: translateY(-3px);
+        } 
+        button :active {
+            transform: scale(0.96);
+        }
+        #message {
+            margin-top: 22px;
+            line-height: 1.6;
+        }
+        /* mobile Responsive Design*/
+        * {
+            box-sizing: border-box;
+        }
+        .card,
+        #paymentcard,
+        #historyCard {
+            width: 100%;
+            max-width: 420px;
+        }
+        button{
+            max-width: 100%;
+            margin: 6px 4px;
+        }
+        @media(max-width:480px){
+            body {
+                padding: 20px 12px;
+            }
+            h1 {
+                font-size: 27px;
+                margin-top: 35px;
+                overflow-wrap: anywhere;
+            }
+            p {
+                font-size: 16px;
+            }
+            .card {
+                padding: 24px 14px;
+            }
+            button{
+                padding: 13px 20px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>MYNTRIX TAPBACK</h1>
+    <P>Tap. Connect. Simplify</P>
+    <div class="card">
+        <h2>welcome!</h2>
+        <p>Smart Nfc Experience</p>
+        <button onclick="document.getElementById('message').innerHTML='welcome to MYNTRIX TAPBACK! your smart tap experience starts here.'">
+            START
+        </button>
+        <button onclick="nfcDemo()">NFC TAP DEMO</button>
+        <div id="message"></div>
+        <button onclick="nfcDemo()">NFC TAP DEMO</button>
+        <div id="message"></div>
+        <div id="nfcCard"
+        style="display: none;
+        margin-top: 25px;
+        padding: 25px;
+        background: #0b1730; color: white;
+        border: 2px solid #00ccff;
+        border-radius: 18px; box-shadow: 0 0 20px #00ccff55;">
+        <h2>NFC Information Card</h2>    
+        <p><b>Project:</b>MYNTRIX TAPBACK</p>
+        <p><b>Tag name:</b>Smart Info Tag</p>
+        <p><b>Purpose:</b>Tap to view information</p>
+        <p><b>Status:</b>Demo Ready</p>
+    </div>
+    </div>
+    <div id="paymentcard"
+    style="margin-top:25px;
+    padding:28px; background:linear-gradient(145DEG,#101D3A,#06101F);
+    color:white; border:1px solid #00ccff; border-radius:22px;
+    box-shadow: 0 0 18PX #00ccff55; max-width: 420px; margin-left: auto; margin-right: auto;">
+        <h2>MYNTRIX Pay Demo</h2>
+        <p style="color:#a9c5e8;
+        font-size: 14px;">DEMO WALLWT BALANCE</p>
+        <h1 style="color: #00ccff; font-size: 34px;, margin-top: 5px;" >₹<span
+        id="balance">1000</span></h1>
+        <p>Payment Status: Ready</p>
+        <button onclick=" 
+        if (Number(document.getElementById('balance').innerText)>=10) {
+        document.getElementById('balance').innerText = Number(document.getElementById('balance').innerText)-10;
+        document.getElementById('paymentstatus').innerHTML='✅ PAYMENT SUCCESSFUL! (DEMO ONLY)';
+        document.getElementById('nohistory').style.display='none';
+        const item =
+        document.createElement('li');
+        item.style.color = '#00ccff';
+        item.style.marginTop='10px';
+        item.innerText='₹10-successful (demo)';
+        document.getElementById('historylist').appendChild(item);
+        console.log('transaction added!');
+        } else {
+        document.getElementById('paymentstatus').innerHTML='Insufficient demo balance!';
+        }">
+            PAY ₹10 (DEMO)
+        </button>
+        <p id="paymentstatus"
+        style ="color: #00ccff;
+        font-weight: bold; font-size: 20px; 
+        margin-top: 15px; text-shadow: 0 0 10px #00ccff;"></p>
+    </div>
+    <div id="historyCard"
+    style="margin: 25px auto;
+    padding: 22px; max-width: 420px;
+    background: #0b1730; color: white;
+    border: 1px solid #00ccff; border-radius: 18px; box-shadow: 0 0 15px #00ccff33;">
+        <h2 style="color: #00ccff;">Transaction history</h2>
+        <p id="nohistory" 
+    style="color: #a9c5e8;">No transactions yet</p>
+        <u1 id="historylist"
+        style="padding-left: 20px;"></u1>
+    </div>
+    <script>
+        function startApp() {
+            document.getElementById("message").innerHTML=
+            "welcom to MYNTRIX TAPBACK!<br>" + "your smart tap experience starts here.";
+        }
+        function nfcDemo() {
+        document.getElementById('message').innerHTML='NFC Demo started!';
+            const card = document.getElementById('nfcCard');
+            if (card) {
+                card.style.display='block';
+        }
+        }
+    </script>
+</body>
+</html>
